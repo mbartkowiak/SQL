@@ -1,0 +1,9 @@
+select v_GS_PC_BIOS.ResourceID,v_GS_PC_BIOS.SerialNumber0,v_GS_COMPUTER_SYSTEM.Name0 from v_GS_PC_BIOS 
+
+LEFT JOIN v_GS_COMPUTER_SYSTEM ON v_GS_COMPUTER_SYSTEM.ResourceID = v_GS_PC_BIOS.ResourceID
+
+where v_GS_PC_BIOS.SerialNumber0 in (
+    select v_GS_PC_BIOS.SerialNumber0 from v_GS_PC_BIOS
+    group by v_GS_PC_BIOS.SerialNumber0 having count(*) > 1
+)
+
